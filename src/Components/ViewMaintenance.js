@@ -38,12 +38,12 @@ const ViewMaintenance = () => {
                 <tbody>
                     {data.map(item => (
                     <tr key={item.id}>
-                        <td><input type="checkbox" defaultChecked={item.maintenance}></input></td>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.company}</td>
-                        <td>{item.length}<span className="unit-length">m</span></td>
-                        <td>{item.stationname}</td>
+                        <td class="col-maintenance"><input type="checkbox" defaultChecked={item.maintenance}></input></td>
+                        <td class="col-id">{item.id}</td>
+                        <td class="col-name">{item.name}</td>
+                        <td class="col-company">{item.company}</td>
+                        <td class="col-length">{item.length}<span className="unit-length">m</span></td>
+                        <td class="col-stationname">{item.stationname}</td>
                     </tr>
                     ))}
                 </tbody>

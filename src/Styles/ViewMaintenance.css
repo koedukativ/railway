@@ -13,7 +13,7 @@
 .railway-maintenance table, .railway-maintenance th, .railway-maintenance td {
     border: 1px solid #666;
   }
-.railway-maintenance th {
+.railway-maintenance th, .railway-maintenance td {
     padding:5px;
 }
 .railway-maintenance th {
@@ -23,3 +23,5 @@
 .unit-length {
     margin-left:4px;
 }
+.col-length, .col-id {text-align:right;}
+.col-name, .col-stationname, .col-company {text-align:left;}
