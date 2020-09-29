@@ -1,3 +1,8 @@
+body {
+  overflow-y:scroll;
+  padding:20px;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,31 @@
   to {
     transform: rotate(360deg);
   }
+}
+.railway-header {
+  text-align:center;
+}
+.railway-menu { 
+  display:block;
+  margin-bottom:20px;
+  margin: 0 auto;
+  text-align:center;
+}
+.railway-menu a, .railway-menu a:link, .railway-menu a:visited, .railway-menu a:hover, .railway-menu a:active {
+  display:inline-block;
+  border:1px solid black;
+  background-color:#999;
+  padding:10px;
+  margin:10px;
+  border-radius:5px;
+  color:#333;
+  text-decoration:none;
+  font-weight:bold;
+}
+.railway-menu a:hover {
+  background-color:#ccc;
+  color:black;  
+}
+.railway-menu a:focus {
+  outline:none;
 }
