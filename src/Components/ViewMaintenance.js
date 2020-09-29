@@ -27,23 +27,23 @@ const ViewMaintenance = () => {
              <table>
                 <thead>
                     <tr>
-                        <th>Maintenance</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Length</th>
-                        <th>Current Station</th>
+                        <th className="col-maintenance">Maintenance</th>
+                        <th className="col-id">ID</th>
+                        <th className="col-name">Name</th>
+                        <th className="col-company">Company</th>
+                        <th className="col-length">Length</th>
+                        <th className="col-stationname">Current Station</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map(item => (
                     <tr key={item.id}>
-                        <td class="col-maintenance"><input type="checkbox" defaultChecked={item.maintenance}></input></td>
-                        <td class="col-id">{item.id}</td>
-                        <td class="col-name">{item.name}</td>
-                        <td class="col-company">{item.company}</td>
-                        <td class="col-length">{item.length}<span className="unit-length">m</span></td>
-                        <td class="col-stationname">{item.stationname}</td>
+                        <td className="col-maintenance"><input type="checkbox" defaultChecked={item.maintenance}></input></td>
+                        <td className="col-id">{item.id}</td>
+                        <td className="col-name">{item.name}</td>
+                        <td className="col-company">{item.company}</td>
+                        <td className="col-length">{item.length}<span className="unit-length">m</span></td>
+                        <td className="col-stationname">{item.stationname}</td>
                     </tr>
                     ))}
                 </tbody>
