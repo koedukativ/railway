@@ -1,5 +1,6 @@
   
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import './../Styles/ViewMaintenance.css';
 
 const ViewMaintenance = (props) => {
@@ -9,7 +10,12 @@ const ViewMaintenance = (props) => {
     const [error, setError] = useState(""); */
   
     return (
-        <div className="railway-maintenance">View Template</div>
+        <div className="railway-maintenance">
+            
+
+
+
+        </div>
     );
   };
   export default ViewMaintenance;
