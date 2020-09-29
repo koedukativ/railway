@@ -1,0 +1,25 @@
+.railway-maintenance {
+    display:block;
+    margin:0 auto;
+    text-align:center; 
+    
+    padding:auto;
+}
+.railway-maintenance table {
+    margin: 0 auto;
+    text-align:center; background:#ddd;
+    border-collapse: collapse;
+}
+.railway-maintenance table, .railway-maintenance th, .railway-maintenance td {
+    border: 1px solid #666;
+  }
+.railway-maintenance th {
+    padding:5px;
+}
+.railway-maintenance th {
+    background:#ccc; 
+    font-weight:bold;
+}
+.unit-length {
+    margin-left:4px;
+}
