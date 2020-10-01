@@ -20,9 +20,16 @@
     background:#ccc; 
     font-weight:bold;
 }
+.railway-maintenance td {
+    background:#eee; 
+    font-weight:normal;
+}
 .unit-length {
     margin-left:4px;
     color:#999;
 }
+.railway-maintenance .changed-row {border-left:4px solid lightseagreen;}
+.railway-maintenance .changed-row td {/*background:#fcc !important;*/ }
+.railway-maintenance .col-hasChanges {/*display:none;*/}
 td.col-length, td.col-id {text-align:right;}
 td.col-name, td.col-stationname, td.col-company {text-align:left; }
