@@ -12,8 +12,7 @@ const ViewMaintenance = () => {
       };
  
     const getMaintenanceData = () => {
-        // resets states because this is reused for reloading
-        setData();
+        // resets counterstate because this is reused for reloading
         setChangeCounter(0);
         const fetchData = async () => {
             const result = await axios.get(
@@ -78,13 +77,11 @@ const ViewMaintenance = () => {
         // state
         if (state!==initialState){
             // data has been changed
-            clickedRow.classList="changed-row";
             newData[clickedIndex].hasChanges=true;
             newData[clickedIndex].maintenance=state;
             setChangeCounter(changeCounter+1);
         }else{
             // data is unchanged (or returned to initial state), so it needs no update
-            clickedRow.classList="";
             newData[clickedIndex].hasChanges=false;
             newData[clickedIndex].maintenance=state;
             setChangeCounter(changeCounter-1);
@@ -138,7 +135,7 @@ const ViewMaintenance = () => {
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                    <tr key={item.id}>
+                    <tr key={item.id} className={item.hasChanges?"changed-row":"unchanged-row"}>
                         <td className="col-maintenance"><input type="checkbox" data-index={item.index} data-id={item.id} data-initialstate={item.initialState} data-checkstate={item.maintenance} onChange={(e) => handleCheckbox(e)} defaultChecked={item.maintenance}></input></td>
                         <td className="col-id">{item.id}</td>
                         <td className="col-name">{item.name}</td>
