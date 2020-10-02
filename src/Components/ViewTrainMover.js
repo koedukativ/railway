@@ -5,33 +5,55 @@ import axios from 'axios';
 
 const ViewTrainMover = () => {
     const axios = require('axios');
-    const [data, setData] = useState([]);
+    const [trains, setTrains] = useState([]);
+    const [stations, setStations] = useState([]);
+    const [train, moveTrain] = useState();
     const [error, setError] = useState([]);
 
-    // Load all trains and their current station
+    
     useEffect(() => {
+        // Load all trains and their current station
         axios.get('http://localhost:3001/move/')
-        .then(response => setData(response.data))
+        .then(response => setTrains(response.data))
+        .catch((e) => console.log(e));
+
+        // Load all stations
+        axios.get('http://localhost:3001/move/stations/')
+        .then(response => setStations(response.data))
+        .catch((e) => console.log(e))
     },[]) 
 
 
     // TO DO
-    // Load train.id and station.id via backend
-    // Display Current Station correctly
-    // Generate state: Train.ID, Current Station.ID, Send to Station.ID
-    // put request to server
+    // send request to server
+    // Update view
+    // Bonus: Load all info about that one train
     // Bonus: Handle multiple requests?
 
 
     const loadStation = () => {
-        const currentStation = document.querySelector('#train-list').value;
-        document.querySelector('#current-station').innerHTML = currentStation;
+        // Load the station where the train is currently standing
+        const selectedTrain = document.querySelector('#train-list').value;
+        const trainInfo = trains.find(set => set.train === selectedTrain);
+        moveTrain(trainInfo);
+        document.querySelector('#current-station').innerHTML = trainInfo.station;
+    }
+
+    const sendTrain = () => {
+        // Find Station ID and paste it to the state
+        const selectedStation = document.querySelector('#station-list').value;
+        const stationId = stations.find(set => set.name === selectedStation).id;
+        console.log(stationId);
+        axios.put(`http://localhost:3001/move/${train.train_id}?station=${stationId}`)
+        .then(response => console.log(response))
+        .catch((e) => console.log(e)); 
+        loadStation();
     }
 
     return (
         <div className="railway-train-mover">
             <h1>Move a train</h1>
-            {data ? (
+            {trains ? (
                 <div> 
                 <table>
                     <thead>
@@ -46,7 +68,7 @@ const ViewTrainMover = () => {
                             <td>
                             <select id='train-list' onChange={loadStation}>
                                 <option disabled selected value> -- select a train -- </option>
-                                {data.map((set, index) => (
+                                {trains.map((set, index) => (
                                     <option key={index}>{set.train}</option>
                                 ))}
                             </select>
@@ -55,12 +77,12 @@ const ViewTrainMover = () => {
                             <td>
                             <select id='station-list'>
                                 <option disabled selected value> -- select a station -- </option>
-                                {data.map((set, index) => (
-                                    <option key={index}>{set.station}</option>
+                                {stations.map((set, index) => (
+                                    <option key={index}>{set.name}</option>
                                 ))}
                             </select>
                             </td>
-                            <td><button>Submit</button></td>
+                            <td><button onClick={sendTrain}>Submit</button></td>
                         </tr>
                     </tbody>
                 </table>
