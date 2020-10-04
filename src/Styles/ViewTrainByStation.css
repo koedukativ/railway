@@ -26,3 +26,19 @@ h1 {
     width: 150px;
 }
 
+.dissapear {
+    display: none;
+}
+
+.train-description-centering {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.select-by-station{
+    padding:0.65em;
+}
+.show-all-button {
+    margin-left: 0.5em;
+    padding: 0.65em;
+}
+

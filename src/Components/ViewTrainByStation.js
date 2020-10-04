@@ -2,51 +2,67 @@
 import React, { useEffect, useState } from "react";
 import './../Styles/ViewTrainByStation.css';
 import axios from 'axios';
+import Train from './Train';
 
 const ViewTrainByStation = (props) => {
-    // const {stationid} = props.match.params;
-    const [station, setStation] = useState({});
+    const [train, setTrain] = useState([]);
+    const [dropdown, setDropdown] = useState([]);
+  
+  
 
-   useEffect(() => {
-    axios.get('http://localhost:3000/stations').then(data => setStation(data)).catch(err=>console.log(err));
+//passing stations into dropdown 
+useEffect(async() => {
+  const stationDropdown = await axios.get("http://localhost:3000/stations");
+  setDropdown(stationDropdown.data.map(({name, id})=>{return {label:name,value:id}}));
+}, []);
 
-   }, []);
-  console.log(station);
-    return (
-        <div className="railway-station">
-            <h1>Train by Station</h1>
+
+//Select train by specific station - onChange handler
+const optionHandler = (id) => {
+     axios.get(`http://localhost:3000/stations/${id}`)
+    .then(data => setTrain(data))
+    .catch(err=>console.log(err));
+     
+   }
+
+   //Show all trains
+   const showAllStations = () => {
+    axios.get(`http://localhost:3000/stations/`)
+    .then(data => setTrain(data))
+    .catch(err=>console.log(err));
+   }
+
+
+return (
+ <div className="railway-station">
+   <div className="train-description-centering">
+     
    
-            {station.data ? station.data.map((element,index) => {
-                return(
-                    <div key={index}>
-                        
-                <table className="railway-station-table">
-                    <thead className="railway-station-table-head">
-                    <tr className="railway-station-table-column-head">
-                        <th>Name</th>
-                        <th>City</th>
-                        <th>Company</th>
-                        <th>Country</th>
-                        <th>Length</th>
-                        <th>Maintenance/Condition</th>
-                    </tr>
-                    </thead>
+   <p >Select train by station</p>
 
-                    <tbody className="railway-station-table-body">
-                    <tr className= "railway-station-table-column-head">
-                        <td>{element.name}</td>
-                        <td>{element.city}</td>
-                        <td>{element.company}</td>
-                        <td>{element.country}</td>
-                        <td>{element.length}</td>
-                        {element.maintenance === true ?<td>Good</td> : <td>Repair required</td> }
-                    </tr>
-                    </tbody>
-                </table>
-               </div> )
-            }):null}
+{/* Station dropdown menu */}
 
-        </div>
+    <select className="train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
+      <option>Select train by station</option>
+      {dropdown.map((item, index)=>{
+         return <option key={index} value={item.value}> {item.label} </option>})}
+    
+    </select>         
+<button className="train-description-centering show-all-button" onClick={showAllStations}>Show all stations</button>
+</div>
+{/* Train component */}
+   {train.data ? train.data.map((elem,index) => {
+      return(
+      <Train key={index} className=""
+
+       name={elem.name}
+       city={elem.company} 
+       station={elem.current_station}
+       length={elem.length}
+       /> ) 
+       }):null}
+
+  </div>
     );
   };
   export default ViewTrainByStation;
