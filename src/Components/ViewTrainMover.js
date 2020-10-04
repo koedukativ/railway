@@ -1,6 +1,6 @@
   
 import React, { useEffect, useState } from "react";
-import './../Styles/ViewTrainMover.css';
+import './../Styles/ViewMaintenance.css';
 import axios from 'axios';
 
 const ViewTrainMover = () => {
@@ -12,11 +12,7 @@ const ViewTrainMover = () => {
 
     
     useEffect(() => {
-        // Load all trains and their current station
-        axios.get('http://localhost:3001/move/')
-        .then(response => setTrains(response.data))
-        .catch((e) => console.log(e));
-
+        loadAllStations();
         // Load all stations
         axios.get('http://localhost:3001/move/stations/')
         .then(response => setStations(response.data))
@@ -25,51 +21,67 @@ const ViewTrainMover = () => {
 
 
     // TO DO
-    // send request to server
-    // Update view
     // Bonus: Load all info about that one train
+    // Bonus: Give feedback about successful change
     // Bonus: Handle multiple requests?
+    // Design 
 
+    const loadAllStations = () => {
+          // Load all trains and their current station
+          axios.get('http://localhost:3001/move/')
+          .then(response => setTrains(response.data))
+          .catch((e) => console.log(e));
+    }
 
     const loadStation = () => {
         // Load the station where the train is currently standing
-        const selectedTrain = document.querySelector('#train-list').value;
-        const trainInfo = trains.find(set => set.train === selectedTrain);
+        let selectedTrain = document.querySelector('#train-list').value;
+        selectedTrain = Number(selectedTrain.slice(0, 2));
+        const trainInfo = trains.find(set => set.train_id === selectedTrain);
         moveTrain(trainInfo);
         document.querySelector('#current-station').innerHTML = trainInfo.station;
     }
+
+    const resetInput = () => {
+        document.querySelector('#train-list').value = "";
+        document.querySelector('#station-list').value = "";
+        document.querySelector('#current-station').innerHTML = "";
+    }
+
 
     const sendTrain = () => {
         // Find Station ID and paste it to the state
         const selectedStation = document.querySelector('#station-list').value;
         const stationId = stations.find(set => set.name === selectedStation).id;
-        console.log(stationId);
         axios.put(`http://localhost:3001/move/${train.train_id}?station=${stationId}`)
         .then(response => console.log(response))
+        .then(loadAllStations())
+        .then(resetInput())
         .catch((e) => console.log(e)); 
-        loadStation();
     }
 
     return (
-        <div className="railway-train-mover">
+        <div className="railway-maintenance">
             <h1>Move a train</h1>
             {trains ? (
                 <div> 
                 <table>
                     <thead>
                         <tr>
-                            <th>Train</th>
-                            <th>Current Station</th>
-                            <th>Send to</th>
+                            <th className="col-id">ID</th>
+                            <th className="col-name">Train</th>
+                            <th className="col-stationname">Station</th>
+                            <th className="col-hasChanges">Changed?</th>
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <tr>
                             <td>
                             <select id='train-list' onChange={loadStation}>
                                 <option disabled selected value> -- select a train -- </option>
                                 {trains.map((set, index) => (
-                                    <option key={index}>{set.train}</option>
+                                    <option key={index}>{set.train_id} - {set.train}</option>
                                 ))}
                             </select>
                             </td>
@@ -82,10 +94,10 @@ const ViewTrainMover = () => {
                                 ))}
                             </select>
                             </td>
-                            <td><button onClick={sendTrain}>Submit</button></td>
                         </tr>
                     </tbody>
                 </table>
+                <button onClick={sendTrain}>Submit</button>
                 </div>
                 ) : <p>Data currently loading</p>
             }
