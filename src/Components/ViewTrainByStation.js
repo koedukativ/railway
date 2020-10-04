@@ -13,15 +13,24 @@ const ViewTrainByStation = (props) => {
 //passing stations into dropdown 
 useEffect(async() => {
   const stationDropdown = await axios.get("http://localhost:3000/stations");
-  setDropdown(stationDropdown.data.map(({name, id})=>{return {label:name,value:id}}));
+  console.log(stationDropdown);
+  setDropdown(stationDropdown.data.map(({id, dropdownlabel})=>{return {label:dropdownlabel,value:id}}));
 }, []);
 
 
 //Select train by specific station - onChange handler
-const optionHandler = (id) => {
-     axios.get(`http://localhost:3000/stations/${id}`)
+const optionHandler = (value) => {
+dropdown.map((elem) => {
+  
+  if (elem.label === value) {
+  return(  
+     axios.get(`http://localhost:3000/stations/${elem.value}`)
     .then(data => setTrain(data))
-    .catch(err=>console.log(err));
+    .catch(err=>console.log(err))
+   )
+  }
+})
+    
      
    }
 
@@ -45,7 +54,7 @@ return (
     <select className="train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
       <option>Select train by station</option>
       {dropdown.map((item, index)=>{
-         return <option key={index} value={item.value}> {item.label} </option>})}
+         return <option key={index} value={item.id}> {item.label} </option>})}
     
     </select>         
 <button className="train-description-centering show-all-button" onClick={showAllStations}>Show all stations</button>
