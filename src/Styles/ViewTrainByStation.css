@@ -1,0 +1,44 @@
+h1 {
+    text-align: center;
+}
+.railway-station-table {
+ margin:0 auto;
+
+   
+}
+
+.railway-station-table td {
+    background-color: lightcyan;
+}
+.railway-station-table th {
+    border:1px solid grey;
+    
+    padding: 1em;
+    background-color:lightsteelblue;
+}
+
+.railway-station-table-column-head td {
+    border:1px solid grey;
+    padding: 1em;
+}
+
+.railway-station-table-head th,.railway-station-table-body td{
+    width: 150px;
+}
+
+.dissapear {
+    display: none;
+}
+
+.train-description-centering {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.select-by-station{
+    padding:0.65em;
+}
+.show-all-button {
+    margin-left: 0.5em;
+    padding: 0.65em;
+}
+
