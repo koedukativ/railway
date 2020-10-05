@@ -84,7 +84,6 @@ const ViewTrainMover = () => {
                             <th className="col-name">Train</th>
                             <th className="col-company">Company</th>
                             <th className="col-stationname">Station</th>
-                            <th className="col-hasChanges">Changed?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +100,6 @@ const ViewTrainMover = () => {
                                 ))}
                                 </select>
                             </td>
-                            <td className="col-hasChanges">{set.changes ? 'y':'n'}</td>
                         </tr>
                         ))}
                     </tbody>
