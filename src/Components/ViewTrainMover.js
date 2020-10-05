@@ -27,7 +27,8 @@ const ViewTrainMover = () => {
 
     const loadAllTrains = () => {
           // Load all trains and their current station
-          axios.get('http://localhost:3001/move/')
+        setChangeCounter(0);
+        axios.get('http://localhost:3001/move/')
           .then(response => setTrains(response.data))
           .then(addChangeCounter())
           .catch((e) => console.log(e));
@@ -49,8 +50,10 @@ const ViewTrainMover = () => {
         moveStations = moveStations.slice(0, -1);
         console.log(moveStations);
         axios.put(`http://localhost:3001/move?trains=${moveTrains}&stations=${moveStations}`)
-            .then(response => console.log(response))
-            .then(loadAllTrains())
+            .then(response => {
+                console.log(response);
+                loadAllTrains();
+            })
             .catch((e) => console.log(e)); 
     }
 
