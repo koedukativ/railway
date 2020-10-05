@@ -33,6 +33,8 @@ ViewGeneral        | Displays all available trains and stations
 ViewTrainByStation | Displays all trains at a specified station
 ViewMaintenance    | Displays all trains and allows to toggle maintenance status
 ViewTrainMover     | Displays all trains and allows to move to different stations
+Controllers        | Generate the SQL for the dbConnection to ElephantSQL
+routes             | Create the Endpoints for API Calls
 
 
 # Credits
