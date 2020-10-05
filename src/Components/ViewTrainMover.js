@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import './../Styles/ViewMaintenance.css';
 import axios from 'axios';
+import * as APIconfig from "./APIconfig";
 
 const ViewTrainMover = () => {
     const axios = require('axios');
@@ -14,7 +15,7 @@ const ViewTrainMover = () => {
     useEffect(() => {
         loadAllTrains();
         // Load all stations
-        axios.get('http://localhost:3001/move/stations/')
+        axios.get(APIconfig.baseURL+'move/stations/')
         .then(response => setStations(response.data))
         .catch((e) => console.log(e))
     },[]) 
@@ -28,7 +29,7 @@ const ViewTrainMover = () => {
     const loadAllTrains = () => {
           // Load all trains and their current station
         setChangeCounter(0);
-        axios.get('http://localhost:3001/move/')
+        axios.get(APIconfig.baseURL+'move/')
           .then(response => setTrains(response.data))
           .then(addChangeCounter())
           .catch((e) => console.log(e));
@@ -49,7 +50,7 @@ const ViewTrainMover = () => {
         moveTrains = moveTrains.slice(0, -1);
         moveStations = moveStations.slice(0, -1);
         console.log(moveStations);
-        axios.put(`http://localhost:3001/move?trains=${moveTrains}&stations=${moveStations}`)
+        axios.put(APIconfig.baseURL+`move?trains=${moveTrains}&stations=${moveStations}`)
             .then(response => {
                 console.log(response);
                 loadAllTrains();
