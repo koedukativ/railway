@@ -13,7 +13,7 @@ const ViewTrainByStation = (props) => {
 
 //passing stations into dropdown 
 useEffect(async() => {
-  const stationDropdown = await axios.get("http://localhost:3000/stations");
+  const stationDropdown = await axios.get("http://localhost:3001/stations");
   console.log(stationDropdown);
   setDropdown(stationDropdown.data.map(({id, dropdownlabel})=>{return {label:dropdownlabel,value:id}}));
 }, []);
@@ -25,7 +25,7 @@ dropdown.map((elem) => {
   
   if (elem.label === value) {
   return(  
-     axios.get(`http://localhost:3000/stations/${elem.value}`)
+     axios.get(`http://localhost:3001/stations/${elem.value}`)
     .then(data => setTrain(data))
     .catch(err=>console.log(err))
    )
@@ -37,7 +37,7 @@ dropdown.map((elem) => {
 
    //Show all trains
    const showAllTrains = () => {
-    axios.get(`http://localhost:3000/stations/allTrains`)
+    axios.get(`http://localhost:3001/stations/allTrains`)
     .then(data => setTrain(data))
     .catch(err=>console.log(err));
    }
