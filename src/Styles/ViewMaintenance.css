@@ -1,0 +1,48 @@
+.railway-maintenance {
+    display:block;
+    margin:0 auto;
+    text-align:center; 
+    
+    padding:auto;
+}
+.railway-maintenance table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+.railway-maintenance table, .railway-maintenance th, .railway-maintenance td {
+    border: 1px solid #666;
+  }
+.railway-maintenance th, .railway-maintenance td {
+    padding:8px;
+}
+.railway-maintenance th {
+    background:#ccf; 
+    font-weight:bold;
+}
+.railway-maintenance td { 
+    
+    font-weight:normal;
+}
+.railway-maintenance tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+.railway-maintenance tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+
+
+.unit-length {
+    margin-left:4px;
+    color:#999;
+}
+.railway-maintenance .changed-row {border-left:4px solid lightseagreen;}
+/*.railway-maintenance .changed-row td {background:#fcc !important;}
+.railway-maintenance .col-hasChanges {display:none;}
+.railway-maintenance .col-id {/*display:none;}*/
+td.col-length, td.col-id {text-align:right;}
+td.col-name, td.col-stationname, td.col-company {text-align:left; }
+
+.change-counter {margin:10px;}
+.btn-update {padding:5px; margin:5px;}
