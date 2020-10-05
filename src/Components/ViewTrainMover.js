@@ -84,6 +84,7 @@ const ViewTrainMover = () => {
                         <tr>
                             <th className="col-id">ID</th>
                             <th className="col-name">Train</th>
+                            <th className="col-company">Company</th>
                             <th className="col-stationname">Station</th>
                             <th className="col-hasChanges">Changed?</th>
                         </tr>
@@ -93,6 +94,7 @@ const ViewTrainMover = () => {
                         <tr key={index}>
                             <td className="col-id">{set.train_id}</td>
                             <td className="col-name">{set.train}</td>
+                            <td className="col-company">{set.company}</td>
                             <td className="col-stationname">
                                 <select id={`station-${set.train_id}`} onChange={() => handleStationChange(set.train_id)}>
                                     <option>{set.station}</option>
