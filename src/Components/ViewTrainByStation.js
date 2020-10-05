@@ -7,6 +7,7 @@ import Train from './Train';
 const ViewTrainByStation = (props) => {
     const [train, setTrain] = useState([]);
     const [dropdown, setDropdown] = useState([]);
+    const [station, setStation] = useState([]);
   
   
 
@@ -35,8 +36,8 @@ dropdown.map((elem) => {
    }
 
    //Show all trains
-   const showAllStations = () => {
-    axios.get(`http://localhost:3000/stations/`)
+   const showAllTrains = () => {
+    axios.get(`http://localhost:3000/stations/allTrains`)
     .then(data => setTrain(data))
     .catch(err=>console.log(err));
    }
@@ -57,7 +58,7 @@ return (
          return <option key={index} value={item.id}> {item.label} </option>})}
     
     </select>         
-<button className="train-description-centering show-all-button" onClick={showAllStations}>Show all stations</button>
+<button className="train-description-centering show-all-button" onClick={showAllTrains}>Show all trains</button>
 </div>
 {/* Train component */}
    {train.data ? train.data.map((elem,index) => {
