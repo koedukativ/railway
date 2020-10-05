@@ -21,11 +21,6 @@ const ViewTrainMover = () => {
         .catch((e) => console.log(e))
     },[]) 
 
-
-    // TO DO
-    // Bonus: Give feedback about successful change
-    // Bonus: Additional check
-
     const loadAllTrains = () => {
         // Load all trains and their current station
         setChangeCounter(0);
@@ -91,7 +86,9 @@ const ViewTrainMover = () => {
                         <tr key={index}>
                             <td className="col-id">{set.train_id}</td>
                             <td className="col-name">{set.train}</td>
+
                             <td className="col-company">{set.company}</td>
+
                             <td className="col-stationname">
                                 <select id={`station-${set.train_id}`} onChange={() => handleStationChange(set.train_id)}>
                                     <option>{set.station}</option>

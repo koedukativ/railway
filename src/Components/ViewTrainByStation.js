@@ -2,21 +2,31 @@
 import React, { useEffect, useState } from "react";
 import './../Styles/ViewTrainByStation.css';
 import axios from 'axios';
-import Train from './Train';
+import * as APIconfig from "./APIconfig";
 
-const ViewTrainByStation = (props) => {
+const ViewTrainByStation = () => {
     const [train, setTrain] = useState([]);
     const [dropdown, setDropdown] = useState([]);
-    const [station, setStation] = useState([]);
+  
   
   
 
 //passing stations into dropdown 
-useEffect(async() => {
-  const stationDropdown = await axios.get("http://localhost:3000/stations");
-  console.log(stationDropdown);
-  setDropdown(stationDropdown.data.map(({id, dropdownlabel})=>{return {label:dropdownlabel,value:id}}));
-}, []);
+useEffect(()=>{
+   const fetchStations = async () => {
+    const stationDropdown = await axios.get(APIconfig.baseURL + "stations");
+    setDropdown(stationDropdown.data.map(({id, dropdownlabel})=>{return {label:dropdownlabel,value:id}}));
+  }
+  fetchStations();
+
+},[])
+  //
+ 
+  
+//   const stationDropdown = await axios.get(APIconfig.baseURL + "stations");
+//   console.log(stationDropdown);
+//   setDropdown(stationDropdown.data.map(({id, dropdownlabel})=>{return {label:dropdownlabel,value:id}}));
+// }, []);
 
 
 //Select train by specific station - onChange handler
@@ -25,7 +35,7 @@ dropdown.map((elem) => {
   
   if (elem.label === value) {
   return(  
-     axios.get(`http://localhost:3000/stations/${elem.value}`)
+     axios.get(`${APIconfig.baseURL}stations/${elem.value}`)
     .then(data => setTrain(data))
     .catch(err=>console.log(err))
    )
@@ -37,7 +47,7 @@ dropdown.map((elem) => {
 
    //Show all trains
    const showAllTrains = () => {
-    axios.get(`http://localhost:3000/stations/allTrains`)
+    axios.get(APIconfig.baseURL + "stations/allTrains")
     .then(data => setTrain(data))
     .catch(err=>console.log(err));
    }
@@ -60,16 +70,33 @@ return (
     </select>         
 <button className="train-description-centering show-all-button" onClick={showAllTrains}>Show all trains</button>
 </div>
-{/* Train component */}
+{/* Train component rendering */}
    {train.data ? train.data.map((elem,index) => {
       return(
-      <Train key={index} className=""
+        <div key={elem.id} className="train-option-picker">
+                        
+        <table className="railway-station-table">
+            <thead className="railway-station-table-head">
+            <tr className="railway-station-table-column-head">
+                <th>Name</th>
+                <th>Company</th>
+                <th>Current Station</th>
+                <th>Length</th>
+                
+            </tr>
+            </thead>
 
-       name={elem.name}
-       city={elem.company} 
-       station={elem.current_station}
-       length={elem.length}
-       /> ) 
+            <tbody className="railway-station-table-body">
+            <tr className= "railway-station-table-column-head">
+                <td>{elem.name}</td>
+                <td>{elem.company}</td>
+                <td>{elem.current_station}</td>
+                <td>{elem.length}</td>
+              
+            </tr>
+            </tbody>
+        </table>
+       </div> ) 
        }):null}
 
   </div>
