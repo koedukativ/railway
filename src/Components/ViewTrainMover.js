@@ -14,6 +14,7 @@ const ViewTrainMover = () => {
     
     useEffect(() => {
         loadAllTrains();
+
         // Load all stations
         axios.get(APIconfig.baseURL+'move/stations/')
         .then(response => setStations(response.data))
@@ -23,11 +24,10 @@ const ViewTrainMover = () => {
 
     // TO DO
     // Bonus: Give feedback about successful change
-    // Reset Form & Data reload
     // Bonus: Additional check
 
     const loadAllTrains = () => {
-          // Load all trains and their current station
+        // Load all trains and their current station
         setChangeCounter(0);
         axios.get(APIconfig.baseURL+'move/')
           .then(response => setTrains(response.data))
@@ -59,15 +59,13 @@ const ViewTrainMover = () => {
     }
 
     const handleStationChange = (train) => {
-        let selectedStation = document.querySelector(`#station-${train}`).value;
+        let selectedStation = document.querySelector(`#station-${train}`).selectedIndex;
         let movementCopy = movement;
         let trainCopy = [...trains];
         // Add desired movement to Movement array
-        selectedStation = Number(selectedStation.slice(0,2));
         movementCopy.push([train, selectedStation]);
         setMovement(movementCopy);
         // Set row to changed
-        // !!! Additional Check needed here: did a change really take place?
         trainCopy[train-1].changes = true;
         setTrains(trainCopy);
         setChangeCounter(changeCounter + 1);
@@ -99,7 +97,7 @@ const ViewTrainMover = () => {
                                 <select id={`station-${set.train_id}`} onChange={() => handleStationChange(set.train_id)}>
                                     <option>{set.station}</option>
                                         {stations.map((set, index) => (
-                                    <option key={index}>{set.id} - {set.name}</option>
+                                    <option key={index}>{set.name}</option>
                                 ))}
                                 </select>
                             </td>
