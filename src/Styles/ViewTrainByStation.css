@@ -8,13 +8,13 @@ h1 {
 }
 
 .railway-station-table td {
-    background-color: lightcyan;
+    background-color: #f3f3f3;
 }
 .railway-station-table th {
     border:1px solid grey;
     
     padding: 1em;
-    background-color:lightsteelblue;
+    background-color:#ccf;
 }
 
 .railway-station-table-column-head td {
