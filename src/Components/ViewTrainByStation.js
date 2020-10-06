@@ -7,11 +7,12 @@ import * as APIconfig from "./APIconfig";
 const ViewTrainByStation = () => {
     const [train, setTrain] = useState([]);
     const [dropdown, setDropdown] = useState([]);
+    const [select, setSelect] = useState(true);
   
 //Stations for SELECT - dropwdown 
 useEffect(() => {
    const fetchStations = async () => {
-    const stationDropdown = await axios.get(APIconfig.baseURL + "stations");
+    const stationDropdown = await axios.get(APIconfig.baseURL + "stations/specificTrain");
     
     setDropdown(
       stationDropdown.data.map(({id, dropdownlabel}) => {
@@ -51,7 +52,7 @@ return (
 
 {/* Station dropdown menu */}
 
-    <select className="train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)}>
+    <select className = "train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
       <option>Select train by station</option>
       {dropdown.map((item, index)=>{
          return <option className="hidden" key={index} value={item.id}> {item.label} </option>})}
