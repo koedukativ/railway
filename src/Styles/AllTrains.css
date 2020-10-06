@@ -1,0 +1,36 @@
+.all-trains {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: auto;
+}
+
+.all-trains table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.all-trains table,
+.all-trains th,
+.all-trains td {
+  border: 1px solid #666;
+}
+
+.all-trains th,
+.all-trains td {
+  padding: 8px;
+}
+.all-trains th {
+  background: #ccf;
+  font-weight: bold;
+}
+.all-trains td {
+  font-weight: normal;
+}
+.all-trains tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.all-trains tr:nth-child(odd) {
+  background: #f9f9f9;
+}

@@ -1,0 +1,36 @@
+.all-stations {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: auto;
+}
+
+.all-stations table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.all-stations table,
+.all-stations th,
+.all-stations td {
+  border: 1px solid #666;
+}
+
+.all-stations th,
+.all-stations td {
+  padding: 8px;
+}
+.all-stations th {
+  background: #ccf;
+  font-weight: bold;
+}
+.all-stations td {
+  font-weight: normal;
+}
+.all-stations tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.all-stations tr:nth-child(odd) {
+  background: #f9f9f9;
+}
