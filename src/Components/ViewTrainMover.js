@@ -20,17 +20,16 @@ const ViewTrainMover = () => {
     },[]) 
 
     const loadAllTrains = () => {
-        // Load all trains and their current station
-        setChangeCounter(0);
-        axios.get(APIconfig.baseURL+'move/')
-          .then(response => setTrains(response.data))
-          .then(addChangeCounter())
-          .catch((e) => console.log(e));
-    }
 
-    const addChangeCounter = () => {
-        const newData = trains.map((set) => ({...set, changes: false}));
-        setTrains(newData); 
+        const getTrains = async () => {
+            const loadedTrains = await axios.get(APIconfig.baseURL+'move/')
+            const newData = loadedTrains.map((set) => ({...set, changes: false}));
+            setTrains(newData); 
+        }
+
+         // Change Counter is reset to 0 upon loading
+        setChangeCounter(0);
+        getTrains();
     }
 
     const sendTrains = () => {
