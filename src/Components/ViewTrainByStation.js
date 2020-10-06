@@ -51,7 +51,7 @@ return (
 
 {/* Station dropdown menu */}
 
-    <select className = "train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
+    <select className="train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)}>
       <option>Select train by station</option>
       {dropdown.map((item, index)=>{
          return <option className="hidden" key={index} value={item.id}> {item.label} </option>})}
