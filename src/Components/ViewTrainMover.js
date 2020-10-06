@@ -5,12 +5,10 @@ import axios from 'axios';
 import * as APIconfig from "./APIconfig";
 
 const ViewTrainMover = () => {
-    const axios = require('axios');
     const [trains, setTrains] = useState([]);
     const [stations, setStations] = useState([]);
     const [movement, setMovement] = useState([]);
     const [changeCounter, setChangeCounter] = useState(0);
-
     
     useEffect(() => {
         loadAllTrains();
@@ -38,7 +36,7 @@ const ViewTrainMover = () => {
     const sendTrains = () => {
         // Contruct correct axios request from array
         let moveTrains = "", moveStations = "";
-        movement.map((element) => {
+        movement.forEach((element) => {
             moveTrains += `${element[0]},`;
             moveStations += `${element[1]},`;
         })
