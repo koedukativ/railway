@@ -7,7 +7,7 @@ import * as APIconfig from "./APIconfig";
 const ViewTrainByStation = () => {
     const [train, setTrain] = useState([]);
     const [dropdown, setDropdown] = useState([]);
-    const [select, setSelect] = useState(true);
+    const [selectValue, setSelectValue] = useState("");
   
 //Stations for SELECT - dropwdown 
 useEffect(() => {
@@ -25,24 +25,37 @@ useEffect(() => {
 
 //Select train by specific station - onChange handler
 const optionHandler = (value) => {
-dropdown.map((elem) => {
   
+dropdown.map((elem) => {
+
   if (elem.label === value) {
-  return(  
+    setSelectValue(value);
+  return( 
+     
      axios.get(`${APIconfig.baseURL}stations/${elem.value}`)
     .then(data => setTrain(data))
     .catch(err=>console.log(err))
+   
    )
+   
+   
    }
+
  })
+ 
 }
 
 //Show all trains handler
 const showAllTrains = () => {
+  setSelectValue("");
+ 
   axios.get(APIconfig.baseURL + "stations/allTrains")
   .then(data => setTrain(data))
   .catch(err => console.log(err));
+
+
    }
+
 
 
 return (
@@ -52,10 +65,10 @@ return (
 
 {/* Station dropdown menu */}
 
-    <select className = "train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
-      <option>Select train by station</option>
+    <select value={selectValue} className = "train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
+    <option>Select train by station</option>
       {dropdown.map((item, index)=>{
-         return <option className="hidden" key={index} value={item.id}> {item.label} </option>})}
+         return <option  className="hidden" key={index} value={item.id}> {item.label} </option>})}
     </select>   
 
 <button className="train-description-centering show-all-button" onClick={showAllTrains}>Show all trains</button>
