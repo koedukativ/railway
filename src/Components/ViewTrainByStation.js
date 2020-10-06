@@ -54,7 +54,7 @@ return (
     <select className = "train-description-centering select-by-station" onChange={(e) => optionHandler(e.target.value)} >
       <option>Select train by station</option>
       {dropdown.map((item, index)=>{
-         return <option key={index} value={item.id}> {item.label} </option>})}
+         return <option className="hidden" key={index} value={item.id}> {item.label} </option>})}
     </select>   
 
 <button className="train-description-centering show-all-button" onClick={showAllTrains}>Show all trains</button>
