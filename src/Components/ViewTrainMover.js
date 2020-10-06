@@ -1,7 +1,7 @@
   
 import React, { useEffect, useState } from "react";
-import './../Styles/ViewMaintenance.css';
-import axios from 'axios';
+import "./../Styles/ViewMaintenance.css";
+import axios from "axios";
 import * as APIconfig from "./APIconfig";
 
 const ViewTrainMover = () => {
@@ -14,7 +14,7 @@ const ViewTrainMover = () => {
         loadAllTrains();
 
         // Load all stations
-        axios.get(APIconfig.baseURL+'move/stations/')
+        axios.get(APIconfig.baseURL+"move/stations/")
         .then(response => setStations(response.data))
         .catch((e) => console.log(e))
     },[]) 
@@ -22,9 +22,8 @@ const ViewTrainMover = () => {
     const loadAllTrains = () => {
 
         const getTrains = async () => {
-            const loadedTrains = await axios.get(APIconfig.baseURL+'move/')
-            const newData = loadedTrains.map((set) => ({...set, changes: false}));
-            setTrains(newData); 
+            const loadedTrains = await axios.get(APIconfig.baseURL+"move/");
+            setTrains(loadedTrains.data);
         }
 
          // Change Counter is reset to 0 upon loading
@@ -41,7 +40,6 @@ const ViewTrainMover = () => {
         })
         moveTrains = moveTrains.slice(0, -1);
         moveStations = moveStations.slice(0, -1);
-        console.log(moveStations);
         axios.put(APIconfig.baseURL+`move?trains=${moveTrains}&stations=${moveStations}`)
             .then(response => {
                 console.log(response);
@@ -51,23 +49,25 @@ const ViewTrainMover = () => {
     }
 
     const handleStationChange = (train) => {
-        let selectedStation = document.querySelector(`#station-${train}`).selectedIndex;
+        let selectedStation = document.querySelector(`#station-${train}`);
         let movementCopy = movement;
-        let trainCopy = [...trains];
-        // Add desired movement to Movement array
-        movementCopy.push([train, selectedStation]);
-        setMovement(movementCopy);
-        // Set row to changed
-        trainCopy[train-1].changes = true;
-        setTrains(trainCopy);
-        setChangeCounter(changeCounter + 1);
+        // Check if the station was changed back to the original station
+        if (selectedStation.value === trains[train-1].station) {
+            setChangeCounter(changeCounter - 1);
+        } else {
+            // Add desired movement to Movement array and increment change Counter
+            setChangeCounter(changeCounter + 1);
+            movementCopy.push([train, selectedStation.selectedIndex]);
+            setMovement(movementCopy);
+        }
+
     }
 
     return (
         <div className="railway-maintenance">
             <h1>Move a train</h1>
             <p>Move a train to another station using the drop-down menu. Submit all changes with the button below.</p>
-            {trains ? (
+            {trains.length ? (
                 <div> 
                 <table>
                     <thead>
@@ -90,7 +90,7 @@ const ViewTrainMover = () => {
                                 <select id={`station-${set.train_id}`} onChange={() => handleStationChange(set.train_id)}>
                                     <option>{set.station}</option>
                                         {stations.map((set, index) => (
-                                    <option key={index}>{set.name}</option>
+                                    <option key={set.id}>{set.name}</option>
                                 ))}
                                 </select>
                             </td>
