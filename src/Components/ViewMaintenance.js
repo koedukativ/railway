@@ -60,7 +60,7 @@ const ViewMaintenance = () => {
 
     const handleCheckbox=(e)=>{
         const checkbox=e.target;
-        const clickedRow=checkbox.parentNode.parentNode;
+        //const clickedRow=checkbox.parentNode.parentNode;
         //const clickedId=checkbox.dataset.id;
         const clickedIndex=checkbox.dataset.index;
         // convert states from string to boolean
