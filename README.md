@@ -39,7 +39,8 @@ routes             | Create the Endpoints for API Calls
 
 # Credits
 
-* Node-graph is created with the free online tool by [yworks](https://live.yworks.com/demos/layout/layoutstyles/index.html)
+* Node-graphs are created with the free online tool by [yworks](https://live.yworks.com/demos/layout/layoutstyles/index.html)
+* also see the newer, advanced version [yEd live](https://www.yworks.com/yed-live/)
 * SQL Data is hosted at [ElephantSQL](https://www.elephantsql.com)
 
 # Have fun!
