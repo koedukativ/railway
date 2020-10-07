@@ -21,8 +21,9 @@
 
 ________________________________________________
 # Structure
+<img src="./src/Assets/readme/structure-frontend.svg" title="Hierarchy of the frontend" alt="Hierarchy of the frontend" width="600">
 <img src="./src/Assets/readme/structure-api.svg" title="Hierarchy of the API" alt="Hierarchy of the API" width="600">
-<img src="" title="Node structure of app component hierarchy" alt="Node structure of app component hierarchy" width="800">
+
 
 File               | Description
 ------------------ | -------------
