@@ -32,9 +32,9 @@ const AllTrains = (props) => {
                 <td className="col-id">{train.id}</td>
                 <td className="col-name">{train.name}</td>
                 <td className="col-company">{train.company}</td>
-                <td className="col-length">{train.length}</td>
+                <td className="col-length">{train.length}m</td>
                 <th className="col-maintenance">{train.maintenance}</th>
-                <th className="col-current_station">{train.current_station}</th>
+                <th className="col-current_station">{train.stationname}</th>
               </tr>
             ))}
           </tbody>
