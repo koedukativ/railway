@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import * as APIconfig from "./APIconfig";
 import "./../Styles/AllStations.css";
 
 const AllStations = (props) => {
   const [stations, setStations] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/stations")
+  /*useEffect(() => {
+    fetch(APIconfig.baseURL + "stations/")
       .then((rawData) => rawData.json())
       .then((data) => setStations(data))
       .catch((e) => console.log("error message", e.message));
+  }, []);
+*/
+
+  useEffect(async () => {
+    const getStations = await axios.get(APIconfig.baseURL + "stations/");
+    setStations(getStations.data);
   }, []);
 
   return (

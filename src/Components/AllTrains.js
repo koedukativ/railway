@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import * as APIconfig from "./APIconfig";
 import "./../Styles/AllTrains.css";
 
 const AllTrains = (props) => {
   const [trains, setTrains] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/trains")
+  /* useEffect(() => {
+    fetch(APIconfig.baseURL + "trains/")
       .then((rawData) => rawData.json())
       .then((data) => setTrains(data))
       .catch((e) => console.log("error message", e.message));
+  }, []); */
+
+  useEffect(async () => {
+    const getTrains = await axios.get(APIconfig.baseURL + "trains/");
+    setTrains(getTrains.data);
   }, []);
 
   return (
@@ -32,9 +39,11 @@ const AllTrains = (props) => {
                 <td className="col-id">{train.id}</td>
                 <td className="col-name">{train.name}</td>
                 <td className="col-company">{train.company}</td>
-                <td className="col-length">{train.length}m</td>
-                <th className="col-maintenance">{train.maintenance}</th>
-                <th className="col-current_station">{train.stationname}</th>
+                <td className="col-length">{train.length} m</td>
+                <td className="col-maintenance2">
+                  <input type="checkbox" checked={train.maintenance} readOnly />
+                </td>
+                <td className="col-current_station2">{train.stationname}</td>
               </tr>
             ))}
           </tbody>

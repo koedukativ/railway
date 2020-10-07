@@ -34,3 +34,7 @@
 .all-stations tr:nth-child(odd) {
   background: #f9f9f9;
 }
+
+.all-stations .col-id {
+  display: none;
+}
