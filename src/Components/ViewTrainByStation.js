@@ -26,7 +26,7 @@ useEffect(() => {
 //Select train by specific station - onChange handler
 const optionHandler = (value) => {
   
-dropdown.map((elem) => {
+dropdown.forEach((elem) => {
 
   if (elem.label === value) {
     setSelectValue(value);
