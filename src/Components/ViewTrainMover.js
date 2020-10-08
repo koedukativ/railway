@@ -25,7 +25,6 @@ const ViewTrainMover = () => {
             const loadedTrains = await axios.get(APIconfig.baseURL+"move/");
             setTrains(loadedTrains.data);
         }
-
          // Change Counter is reset to 0 upon loading
         setChangeCounter(0);
         getTrains();
@@ -52,7 +51,7 @@ const ViewTrainMover = () => {
         let selectedStation = document.querySelector(`#station-${train}`);
         let movementCopy = movement;
         // Check if the station was changed back to the original station
-        if (selectedStation.value === trains[train-1].station) {
+        if (selectedStation.value === trains[train].station) {
             setChangeCounter(changeCounter - 1);
         } else {
             // Add desired movement to Movement array and increment change Counter
@@ -60,7 +59,6 @@ const ViewTrainMover = () => {
             movementCopy.push([train, selectedStation.selectedIndex]);
             setMovement(movementCopy);
         }
-
     }
 
     return (
@@ -83,11 +81,9 @@ const ViewTrainMover = () => {
                         <tr key={index}>
                             <td className="col-id">{set.train_id}</td>
                             <td className="col-name">{set.train}</td>
-
                             <td className="col-company">{set.company}</td>
-
                             <td className="col-stationname">
-                                <select id={`station-${set.train_id}`} onChange={() => handleStationChange(set.train_id)}>
+                                <select id={`station-${index}`} onChange={() => handleStationChange(index)}>
                                     <option>{set.station}</option>
                                         {stations.map((set, index) => (
                                     <option key={set.id}>{set.name}</option>
