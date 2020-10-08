@@ -4,7 +4,7 @@ import * as APIconfig from "./APIconfig";
 import "./../Styles/AllTrains.css";
 
 const AllTrains = (props) => {
-  const [trains, setTrains] = useState([]);
+  const [trains, setTrains] = useState();
 
   /* useEffect(() => {
     fetch(APIconfig.baseURL + "trains/")
@@ -13,9 +13,14 @@ const AllTrains = (props) => {
       .catch((e) => console.log("error message", e.message));
   }, []); */
 
-  useEffect(async () => {
-    const getTrains = await axios.get(APIconfig.baseURL + "trains/");
-    setTrains(getTrains.data);
+  useEffect(() => {
+    const getTrains = async () => {
+      const result = await axios.get(
+        APIconfig.baseURL + "trains/"
+      );
+      setTrains(result.data);
+  };
+  getTrains();
   }, []);
 
   return (

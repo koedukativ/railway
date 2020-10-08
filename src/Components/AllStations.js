@@ -4,7 +4,7 @@ import * as APIconfig from "./APIconfig";
 import "./../Styles/AllStations.css";
 
 const AllStations = (props) => {
-  const [stations, setStations] = useState([]);
+  const [stations, setStations] = useState();
 
   /*useEffect(() => {
     fetch(APIconfig.baseURL + "stations/")
@@ -14,10 +14,15 @@ const AllStations = (props) => {
   }, []);
 */
 
-  useEffect(async () => {
-    const getStations = await axios.get(APIconfig.baseURL + "stations/");
-    setStations(getStations.data);
-  }, []);
+useEffect(() => {
+  const getStations = async () => {
+    const result = await axios.get(
+      APIconfig.baseURL + "stations/"
+    );
+    setStations(result.data);
+};
+getStations();
+}, []);
 
   return (
     <div className="all-stations">

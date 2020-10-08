@@ -39,10 +39,12 @@
 }
 .railway-maintenance .changed-row {border-left:4px solid lightseagreen;}
 
-/*.railway-maintenance .col-hasChanges {display:none;}
-.railway-maintenance .col-id {display:none;}*/
 td.col-length, td.col-id {text-align:right;}
 td.col-name, td.col-stationname, td.col-company {text-align:left; }
 
 .change-counter {margin:10px;}
 .btn-update {padding:5px; margin:5px;}
+
+/* hidden columns */
+.railway-maintenance .col-hasChanges {display:none;}
+.railway-maintenance .col-id {display:none;}
